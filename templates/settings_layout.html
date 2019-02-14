@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <title>Settings</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='guests.css') }}" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="{{ url_for('guests') }}">Back to Guest List</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active nav-link">
+            Settings
+          </li>
+          {% if form1 %}
+          <li class="nav-item active nav-link text-danger">
+            <a class="text-danger" data-toggle="modal" data-target="#ResetModal">Reset Data</a>
+          </li>
+          <li class="nav-item active nav-link text-danger">
+            <a class="text-danger" data-toggle="modal" data-target="#RestartModal">Restart</a>
+          </li>
+          <li class="nav-item active nav-link text-danger">
+            <a class="text-danger" data-toggle="modal" data-target="#PowerModal">Power Off</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="container">
+      <div class="starter-template">
+
+        {% block content %}{% endblock content %}
+
+      </div>
+
+        {% if form1 %}
+        <!--Modal for Data Reset-->
+        <div class="modal fade" id="ResetModal" tabindex="-1" role="dialog" aria-labelledby="ResetModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="ResetModalLabel">Reset All Data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <p>Warning this will reset all data!<br>Client lists and agent lists will both be erased.</p>
+              <div class="modal-footer">
+                <form class="form-inline my-2 my-lg-0" method="POST" action="">
+                  {{ form1.hidden_tag() }}
+
+                  {% if form1.password.errors %}
+                    {{ form1.password(autofocus=true, placeholder="Password:", class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form1.password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                  {% else %}
+                      {{ form1.password(autofocus=true, placeholder="Password:", class="form-control form-control-lg") }}
+                  {% endif %}
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  {{ form1.submit(class="btn btn-danger my-2 my-sm-0", value="Reset Data") }}
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Modal for Power Off-->
+        <div class="modal fade" id="PowerModal" tabindex="-1" role="dialog" aria-labelledby="PowerModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="PowerModalLabel">Power Down</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <p>Warning this will power server off! <br>Restarting requires manual power cycle.</p>
+              <div class="modal-footer">
+                <form class="form-inline my-2 my-lg-0" method="POST" action="">
+                  {{ form2.hidden_tag() }}
+
+                  {% if form2.password.errors %}
+                    {{ form2.password(autofocus=true, placeholder="Password:", class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form2.password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                  {% else %}
+                      {{ form2.password(autofocus=true, placeholder="Password:", class="form-control form-control-lg") }}
+                  {% endif %}
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  {{ form2.submit(class="btn btn-danger my-2 my-sm-0", value="Power OFF") }}
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Modal for Restart OS-->
+        <div class="modal fade" id="RestartModal" tabindex="-1" role="dialog" aria-labelledby="RestartModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="RestartModalLabel">Restart Checkin</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <p>Warning this will restart the server!</p>
+              <div class="modal-footer">
+                <form class="form-inline my-2 my-lg-0" method="POST" action="">
+                  {{ form3.hidden_tag() }}
+
+                  {% if form3.password.errors %}
+                    {{ form3.password(autofocus=true, placeholder="Password:", class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form3.password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                  {% else %}
+                      {{ form3.password(autofocus=true, placeholder="Password:", class="form-control form-control-lg") }}
+                  {% endif %}
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  {{ form3.submit(class="btn btn-danger my-2 my-sm-0", value="Restart Now") }}
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      {% endif %}
+
+    </main><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{ url_for('static', filename='jquery-3.3.1.slim.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <title>Check In</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='cover.css') }}" rel="stylesheet">
+
+  </head>
+
+  <body class="text-center">
+
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner logo-div">
+          <img class="mb-4 logo" src="{{ url_for('static', filename='mastertaxwhite.svg') }}" alt="">
+        </div>
+      </header>
+
+      <main role="main" class="inner cover">
+        {% block content %}{% endblock content %}
+      </main>
+
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p></p>
+        </div>
+      </footer>
+    </div>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{ url_for('static', filename='jquery-3.3.1.slim.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+
+    {% if form %}
+    <script>
+      $(function() {
+        setTimeout(function(){
+          $( "#name" ).click();
+        },1000);
+      });
+    </script>
+    {% endif %}
+
+
+  </body>
+</html>

@@ -1,0 +1,58 @@
+{% extends "guests_layout.html" %}
+{% block content %}
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th class="name">Name</th>
+          <th class="hereto">Here For</th>
+          <th class="herefor">To See</th>
+          <th class="time">Time</th>
+          <th class="toggle">Waiting</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for guest in guests %}
+        {% if guest.seen == False %}
+          {% set class = ' notseen' %}{% set toggle = '1' %}{% set is_read = 'Waiting' %}{% set btn_class = 'btn-outline-success notseen' %}
+        {% else %}{% set toggle = '0' %}{% set is_read = 'Finished' %}{% set btn_class = 'btn-outline-info' %}
+        {% endif %}
+            <tr>
+              {% if if_pic %}
+                <td data-toggle="modal" data-id="{{ url_for('camera_img', picture=guest.image_file) }}" data-target="#myModal" class="name{{ class }}">
+                  {{ guest.name }}
+                </td>
+              {% else %}
+                <td class="name{{ class }}">
+                  {{ guest.name }}
+                </td>
+              {% endif %}
+              <td class="hereto{{ class }}">{{ guest.hereto }}</td>
+              <td class="herefor{{ class }}">{{ guest.herefor }}</td>
+              <td class="time{{ class }}">{{ guest.indate.strftime('%I:%M%p') }}</td>
+              <td class="toggle"><a href="{{ url_for('toggle_guest', guest_id=guest.id, toggle=toggle) }}">
+                <button class="btn {{ btn_class }} toggle-btn toggle-btn" type="submit">{{ is_read }}</button></a>
+              </td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+      <div class="modal-dialog modal-lg vertical-align-center">
+        <div class="modal-content">
+          <img class="client-pic" id="picLink" src="default.jpg">
+        </div>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+      window.setTimeout(function(){
+          window.location.href = "{{ url_for('guests') }}";
+      }, 30000);
+  </script>
+{% endblock content %}

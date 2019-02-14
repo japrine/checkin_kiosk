@@ -1,0 +1,42 @@
+{% extends "settings_layout.html" %}
+{% block content %}
+
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <dir class="form-group">
+                {{ form.name.label(class="form-control-label") }}
+                {% if form.name.errors %}
+                    {{ form.name(autofocus=true, placeholder="Name:", class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.name(autofocus=true, placeholder="Name:", class="form-control form-control-lg") }}
+                {% endif %}
+            </dir>
+            <dir class="form-group">
+                {{ form.display_name.label(class="form-control-label") }}
+                {% if form.display_name.errors %}
+                    {{ form.display_name(placeholder="Display Name:", class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.display_name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.display_name(placeholder="Display Name:", class="form-control form-control-lg") }}
+                {% endif %}
+            </dir>
+        </fieldset>
+        <p class="lead">
+            <div class="form-group">
+                {{ form.submit(class="btn btn-lg toggle-btn btn-outline-success toggle-btn") }}
+            </div>
+        </p>
+    </form>
+
+
+{% endblock content %}

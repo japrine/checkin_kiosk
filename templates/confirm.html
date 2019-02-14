@@ -1,0 +1,15 @@
+{% extends "checkin_layout.html" %}
+{% block content %}
+    <h1 class="cover-heading">Thank You</h1>
+    <h1 class="cover-heading">{{ guest.name }}</h1>
+    <p class="lead">You are now checked in to see {{ guest.herefor }}.</p><br>
+    <p class="lead">Page will return to check in after 15s.</p>
+    <p class="lead">
+      <a href="{{ url_for('check_in') }}" class="btn btn-lg btn-secondary">Return Now</a>
+    </p>
+    <script>
+        window.setTimeout(function(){
+            window.location.href = "{{ url_for('check_in') }}";
+        }, 15000);
+    </script>
+{% endblock content %}

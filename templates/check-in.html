@@ -1,0 +1,50 @@
+{% extends "checkin_layout.html" %}
+{% block content %}
+
+    <h1 class="check-in-heading">Please Check In</h1><br><br><br>
+    <p class="lead">Please provide your name and who you are here to see.</p>
+    <form autocomplete="off" method="POST" action="">
+        {{ form.hidden_tag() }}
+            <dir class="form-group">
+                {% if form.name.errors %}
+                    {{ form.name(autofocus=true, placeholder="Name:", class="form-control form-control-lg is-invalid", autocomplete="off") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.name(autofocus=true, placeholder="Name:", class="form-control form-control-lg", autocomplete="off") }}
+                {% endif %}
+            </dir>
+            <div class="form-group here-drop">
+                {% if form.here_for.errors %}
+                    {{ form.here_for(placeholder="Here to see:", class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.here_for.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.here_for(placeholder="Here to see:", class="form-control form-control-lg") }}
+                {% endif %}
+            </div><div class="form-group visit-drop">
+                {% if form.here_to.errors %}
+                    {{ form.here_to(placeholder="Reason for visit:", class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.here_to.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.here_to(placeholder="Reason for visit:", class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        <p class="lead">
+            <div class="form-group">
+                {{ form.submit(class="btn btn-lg btn-success") }}
+            </div>
+        </p>
+    </form><br>
+
+{% endblock content %}
