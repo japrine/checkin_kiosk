@@ -25,8 +25,8 @@ db = SQLAlchemy(app)
 
 waiting_for = []
 here_to = [('', 'Reason for visit:'),
-           ('Have Appointment', 'I Have a Appointment'),
-           ('Need Appointment', 'I Need a Appointment'),
+           ('Have Appointment', 'I Have an Appointment'),
+           ('Need Appointment', 'I Need an Appointment'),
            ('Have Question', 'I Have a Question'),
            ('Drop Off', 'To Drop Off Taxes'),
            ('Pick Up', 'To Pick Up Taxes')]
